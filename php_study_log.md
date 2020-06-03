@@ -97,3 +97,44 @@ PHP 学習ログ
             - なんやったら，このログもそこで管理したらいいのでは
 - 明日の todo
     - (7) テンプレートを部品化する．から．
+
+## 6/3
+- やったこと
+    - @include で共通部分の読み込み
+        - これ \<head> でスクリプト読むのとどう違うのか．長くなってる気がするが．
+    - EditTask を作って動作確認するとこでエラー出たけど， 
+        ```
+        use App\Http\Requests\EditTask;
+        ```
+        追加で解決．
+    - テストケースの作成が相変わらずめんどくさい．半角の空白のポジションで怒られた．
+        - メッセージは決めた template に沿わせて一意に決定されるようにしたほうがいい
+    - migration に関して
+        - up = migrate したときに実行される処理
+        - down = ロールバックした時に実行される処理
+    - User の概念を DB に追加する時，migration を利用して user_id をテーブルに追加するが，既存のデータには user_id はもちろん定義されていないので migration error となる
+        - 既存のデータに not null 制約が追加されたため発生したエラー．
+        - migrate:fresh して，追加 table のサンプルデータを seeder につめて
+        ```
+        php artisan db:seed --class=シーダー名
+        ```
+        することで解決．
+        - 今まで作ったシーダーを全て実行しないとダメ！
+    - ```
+        Please install the laravel/ui package in order to use the Auth::routes() method.
+      ```
+      ↑ laravel/ui パッケージがインポートされてなかったみたい．解決
+    - register 画面を作る場面で Http/Auth/ ディレクトリまるごとないことに気づく．
+        - 原因はわからないが，おそらくバージョンの違い [参考](https://qiita.com/daisu_yamazaki/items/a914a16ca1640334d7a5)
+        - ```
+            php artisan ui vue --auth
+            ```
+            で対応した．おそらく解決した．
+- できなかったこと
+    - PHP の基本でわかってない部分がある．
+        - rule in (?) とか :: とか
+- **PHP について勉強した**
+    - .(ドット) は文字列の連結に使う．
+    - [Qiita PHP入門](https://qiita.com/mackeyTA/items/069900b5c2366fb30e3a#%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0%E3%81%AE%E4%BD%9C%E6%88%90) がものすごく参考になる．
+- 明日の todo
+    - session 情報削除の方法がわからんくて，ログアウトできなかった．(ログアウト機能が未実装なため．)
