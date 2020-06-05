@@ -1,6 +1,7 @@
-PHP 学習ログ
+PHP 学習ログ その１
 ---
 - php での web アプリ開発の勉強記録．
+- [参考URL](https://www.hypertextcandy.com/laravel-tutorial-introduction) ()記事ではおそらく ```Laravel 5.x```使用
 - ```Laravel Framework 7.13.0``` 使用．
 - Markdown 記法の練習にもなれば．．．
 
