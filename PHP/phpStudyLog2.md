@@ -43,3 +43,12 @@ PHP 学習ログ その２
 - 次回
     - [PHP で時刻を取得する](https://blog.codecamp.jp/php-datetime) を参考に作成．
     - running の get と post がごちゃってる．修正する．
+
+## 6/8
+- サーバー側時計機能の実装
+- timezone 設定
+    - config/app.php の 'timezone'=>'UTC' を 'Asia/Tokyo' に変更
+- runningPage で経過時間を表示する
+    - [jsのセミコロンに関して](https://qiita.com/igayamaguchi/items/ac48b7e12890351ee55a)
+    - elapsed_time.js を作成．
+    - 経過時刻も同時にサーバー側でも計算する？？？
