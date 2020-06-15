@@ -75,5 +75,17 @@ PHP 学習ログ その２
 - github に関して
     - 本来，プロジェクトの設計に基づいてステップごとに commit するらしい．
 - 次回
-    - お疲れ様でした 画面の実装．
+    - お疲れ様でした (result) 画面の実装．
+        - index → study → result と移って， study → result は実行時間を post する．
     - プルダウンにするか一言メモにするか考える．
+
+## 6/15
+- result 画面の実装．
+    - index から memo を study に post, study から result に memo を post．(ここ入力　するとこないけど form に なってる．もうちょい綺麗にしたい．)
+- session を使用した開始時刻と終了時刻の記録．
+    - 以下参考URL
+    - [Laravelでセッションを使ってみる](https://qiita.com/reflet/items/5638ab18fd7cededed17)
+    - [Laravel7 Sessionの使い方](https://mebee.info/2020/05/16/post-10651/)
+- 次回
+    - セッション情報から継続時間を計算する．
+    - その情報を DB に保存．(ここしっかり理解したい．)
