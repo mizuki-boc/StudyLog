@@ -94,3 +94,25 @@ PHP 学習ログ その２
 - 実行時間の計算．
     - ```strtotime()``` でタイムスタンプにして，```gmdate('H:i:s', xxx)``` で H:i:s 表記に変換．
 - ふと思ったが，終了時刻をセッション記録する必要ある？
+
+## 6/16
+- DB の作成, [Macでmysqlを扱う方法](https://qiita.com/fuwamaki/items/194c2a82bd6865f26045)
+- ```.env```の編集． DB 関連箇所
+
+## 6/17 
+- DB 基礎学習 [テーブル,カラム,レコードの違い](https://academy.gmocloud.com/know/20160425/2259)
+- DB 作成．(前回 root でさくせいしてて，それでもいいけど， mizuki で作成した．)
+    - ```create databases [db_name]``` で，```ERROR 1044 (42000): Access denied for user``` ってエラーでたけど， root ユーザーで ```grant create on *.* to mizuki@localhost``` で mizuki に create 権限を付与することで解決．[参考](https://www.dbonline.jp/mysql/user/index6.html)
+    - migrate でも権限エラーが発生したので，mizuki@localhost に全ての権限を付与した．(権限の管理方法について学ぶ必要あり．)
+- migrate で作成したテーブルを DBeaver で確認．[DBeaver使い方メモ](https://qiita.com/12345/items/48f6856e32fd618ea307)
+    - DBeaver からデータベース作成できるっぽい．今度試してみたい．
+- seeder 作成して，デフォルト値の埋め込み．(これページ上から作れる仕様にしたいから，いらない気もするが，一応やってみた．)
+    - DBeaver でテストデータの生成を確認．
+    - プロパティの右下に更新ボタンがあって，これ押さないと反映されない．
+- ___study 画面から result に遷移する時，意味のない form を作って　post してるけど，これ普通に画面遷移だとダメなん？___
+- ブラウザ上で保存ボタンを押して，押した時に学習時間を計算し，それを DB に保存， DBeaver で確認．
+- ___DB 作成から seeder 実行までのフロー (MySQL の場合)___
+    1. CLI から MySQL にログイン，create する．
+    2. laravel プロジェクトの .env の使用する MySQL の port番号,username,password を記入．
+    3. migration ファイルの作成，実行．(テーブルの定義)
+    4. seeder ファイルの作成，(デフォルトデータの挿入)
