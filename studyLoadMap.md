@@ -6,3 +6,4 @@ ____
     - SPA の作成を目標に進めていく．
     - [2020年にJavaScriptフレームワークをちゃんとはじめるために。](https://note.com/rdlabo/n/neb8f70d1c874)
 
+- github でホスティング する方法を勉強したい．

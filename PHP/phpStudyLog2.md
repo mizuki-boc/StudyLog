@@ -138,3 +138,24 @@ PHP 学習ログ その２
     - ページアクセス制限をつける
         - いきなり /result とかにアクセスされると困る．
         - これログイン機能実装しないと無理？？？その場合はログイン機能実装する．
+    - **memo が not null なので，バリデーションが必須！** これも実装する．
+
+## 6/19
+- migration(テーブルの定義)を追加するとき，not null のレコードがある場合，```php artisan migrate:fresh```でテーブルをすべて削除し，マイグレーションを実行し直す．
+- ```unsigned()```は符号なしで　0 から 18446744073709551615 の値をとる．
+    - ```bigIncrements()```は unsigned の bigInt みたいな感じ．
+- users table を作成 (migrate) してない気がするけど，もともと入ってる．
+    - デフォルトで (id, username, email など) 定義されてるっぽい．
+    - もとからある users テーブルの元からある id を作成した folders テーブルの user_id と紐づける．
+- 前やったチュートリアルではシーダーを一個ずつ実行すると書いていたが，[Qiita](https://qiita.com/shosho/items/b69db263a494edfe3b21)にまとめて実行する方法が書いてた．
+- larabel6 以降の認証機能の変更に関して．
+    - 前回のチュートリアルと同様に，```php artisan ui vue --auth```で行けるかと思ったけど，プロジェクトごとに```composer require laravel/ui```する必要があり．[Qiita参考URL](https://qiita.com/daisu_yamazaki/items/a914a16ca1640334d7a5)
+        - **これ先にやっとかないと HomeController やらなんやらが上書きされてしまうので注意！！**
+- デフォルトログイン画面と，アプリの紐付け
+    - デザインはデフォルトのまま
+    - ログイン，新規登録，ログアウトの実装．
+- 次回
+    - 現在，ログインしててもしてなくても履歴を見れるので，履歴とユーザを紐づける．
+    - ログインしていない場合の画面の実装．
+    - チュートリアルでは js で route('logout) にリクエストを送っているが，form 作って submit か，js で submit か，どっちか決める．
+    - layout.blade.php で結構チュートリアルからそのまま引っ張ってきてる部分があるので，ここは修正する．
