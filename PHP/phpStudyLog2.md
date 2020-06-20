@@ -159,3 +159,23 @@ PHP 学習ログ その２
     - ログインしていない場合の画面の実装．
     - チュートリアルでは js で route('logout) にリクエストを送っているが，form 作って submit か，js で submit か，どっちか決める．
     - layout.blade.php で結構チュートリアルからそのまま引っ張ってきてる部分があるので，ここは修正する．
+
+## 6/20
+- ユーザとフォルダのリレーション作成．
+    - 1ユーザに対して多フォルダが存在する今回の場合，User モデルに function で folder を定義する
+    - で，```return $this->hasmany('App\Folder')```を記述．
+    - コントローラーから DB のデータを取得する時は，```Auth::user()->folder()->get()```で認証されたユーザに紐づくフォルダを取得する．
+    - DB に保存する時の forder の user_id は ```Auth::id()```でok (超便利)
+- 未ログイン時，```route('login')```にリダイレクトする機能の実装
+    - コントローラのメソッドの冒頭に ```Auth::check()```で場合わけする方法もあるが，毎回書くのはダサい．
+        - → **ミドルウェアに任せよう．の発想．**
+        - ```Middleware/Authenticate``` の redirectTo メソッドで未ログインの場合は /login にリダイレクトする．**(ここちょっと合ってるか自信ない．)**
+        - 逆に，ログイン時はログイン画面にアクセスされたくないので，```MiddleWare/RedirectIfAuthenticated```にリダイレクト先を書く．[公式ドキュメント](https://readouble.com/laravel/7.x/ja/authentication.html)
+- 問題点
+    - **未ログイン時は /result や /history などの get メソッドで観覧するページへのアクセスはブロックできたが， /study などの post メソッドのページは Laravel のエラーメッセージが表示してしまう問題．**
+- 次回
+    - デザイン関連
+        - vue なり React なりを勉強する．
+        - そもそもどういうものなのか理解できてないため，調べる．
+    - 問題点の解決
+        - エラーハンドリングにヒントがあるかも．(?)
