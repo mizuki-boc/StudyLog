@@ -11,6 +11,6 @@ ___
     - builder のインストール， requirements.txt を最小限に留めたりいろいろ試したが，解決せず．
     - heroku は port 番号が毎回変わるらしい(?)ので，環境変数から使用されている port を取得して，```app.run(port="取得したport")```にしたら解決．
     - 他にも, pyroomacoustic のインストールエラーも発生してたが，いらないので requirements.txt から削除した．(log みたら pyroomscoustic のインストールのとこでひっかかってた)
-
 - studyLog の git commit を自動化したい
     - コメントは日付とかでいいから，ワンクリックで git add. から push までやりたい
+- **push するたびに　requirement.txt の内容全てインストールしてるように見えるが，これなんとかならない？**
