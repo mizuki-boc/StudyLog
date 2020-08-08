@@ -8,3 +8,5 @@ ____
     - [vue VS React](https://qiita.com/102Design/items/ae018dc80a4d879d92a8)
 
 - github でホスティング する方法を勉強したい．
+
+- windows から git push のテスト
