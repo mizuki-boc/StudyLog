@@ -1,5 +1,38 @@
 ## Flutter 勉強ログ
+- widget は別でまとめて、勉強ログは日別にまとめる。
 ---
+## 全般
+- android Studio から flutter プロジェクトを作成するとき、SDK のパスが通ってないと怒られる。毎回 C: の flutter ファイルを指定するのも面倒なので、どうにかしたい。
+
+## Widget
+- ```Scaffold```
+    - 日本語で「足場」
+    - ベースとなるウィジェットで、あんまり多用するものでもないかも
+- ```Container```
+    - html とかの container と同じ感じ。ひとまとめにするもの
+- ```Column```
+    - 縦並びに表示
+- ```Row```
+    - 横並びに表示
+- ```Text```
+    - その名の通りテキストを表示させるウィジェット
+    - css みたいな雰囲気でスタイルを定義したりもできる
+- ```TextField```
+    - 入力フォーム的な感じ。これも html の input 的な感じの奴に似てる。
+- ```RaisedButton```
+    - Raised 以外にもいろいろな種類のボタンがある。Raised は影がついてて浮き出てるデザイン
+- ```AlertDialog```
+    - dialog を表示させる。js の alert() に似てる
+- ```ListView```
+    - ```Column```と見た目はにてるが、```Column``` 異なりスクロールできるようにしてくれる。```Column``` で同じことをするとはみ出てると警告される。
+    - サーバーからデータをもらって、リスト表示するときはこっち
+    - ```scrollDirection``` で横スクロールにもできる
+- ```GridView```
+    - グリッド(格子)表示させる。```ListView```と似てる。
+- ```Expanded```
+    - >ExpandedというWidgetは、RowやColumnの子Widget間の隙間を目一杯埋めたいときに使います。
+    - [【Flutter基礎】Expandedについて](https://qiita.com/nannany_tis/items/d4114f615e4d53964121) 
+
 ## 8/8
 - KBoy の Flutter 大学を見て環境構築 (前にやってた)
 - [GoogleのFlutterドキュメント](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1/index.html?index=..%2F..index#0)を参考に進めた。
@@ -27,3 +60,24 @@
     - [参考](https://qiita.com/uehaj/items/7c07f019e05a743d1022)
 - [Dart 入門](https://qiita.com/teradonburi/items/913fb8c311b9f2bdb1dd) をちょろっと読んだ。
 - [Flutterドキュメント日本語版](https://flutter.ctrnost.com/)
+
+## 8/15
+- flutter プロジェクトを作成するとき、```flutter create ProjectName``` で新しいプロジェクトを作成できる
+- [KBoy の Flutter 大学](https://www.youtube.com/channel/UCReuARgZI-BFjioA8KBpjsw)
+    - android studio ではコマンドS (保存) するとホットリロードする機能もある
+        - あまり VScode で開発する意味はない？かも
+- 今回は android studio で開発してみる
+    - ctrl + Alt + L でコード整形
+    - なれの問題も当然あるけどやりにくい。
+    - android studio がクッソ遅い気がする
+- Alt + Enter でコードに関するショートカットが使える
+    - ウィジェットでラップ、削除、パディングなど
+- **ページ表示はスタック構造**になってる。遷移すると新しいページがスタックされ、戻るのはポップする。
+- ctrl 押しながら遷移先のファイルのクラスをクリックで、そのクラスのファイルに飛ぶ。便利。
+- android studio で保存するとホットリロードされるが、別ファイルの内容は各々保存する必要がありそう。
+    - 多分、main.dart を保存したら解決したっぽい
+- **画像をアセットから表示させる場合**は、```pubspec.yaml```の最後の ```flutter:``` にアセットを表記しなければならない。[flutter.dev](https://api.flutter.dev/flutter/services/AssetBundle-class.html)を参照。
+- KBOY の動画見てると AppBar のテキストがデフォルトで center になってた。Text に Alt + Enter で center ウィジェットでラップすれば解決するけど、なぜ違うのかわからんかった。
+- まとめ
+    - KBOY Flutter 大学　入門チュートリアル終了。~(頑張った。)~　メジャーなウィジェットの使い方、文字の装飾、ページ遷移を学んだ。
+    - 次回も Flutter 大学の チュートリアルを進めていく。firebase 環境構築くらいはやりたい。
