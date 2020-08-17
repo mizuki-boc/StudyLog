@@ -1,19 +1,30 @@
 ## Flutter 勉強ログ
-- widget は別でまとめて、勉強ログは日別にまとめる。
+- IIssues
+    - 現状の問題点。解決したいイシューなど。
+- Loadmap
+    - 今後の方針。この StudyLog の終了地点を示す。
+- Widget
+    - 学んだ Widget を自分なりに理解
+- StudyLog
+    - 日別に学んだことを書く。
 ---
 ## Issues
 - android Studio から flutter プロジェクトを作成するとき、SDK のパスが通ってないと怒られる。毎回 C: の flutter ファイルを指定するのも面倒なので、どうにかしたい。
+    - Android Studio の Setting に SDK パスを設定するところがあったので、そこに入力するといけるかも？
 - アプリのサイズ感を確かめるために Android のエミュレータを起動させたかったが、何故か立ち上げることができなかった。多分原因は BIOS で仮想化を許可していないからな気がするが、どうにかしたい。
-    - エミュレータはクソ遅いらしいので、実機買ったほうが早いかも。
+- mac で iOS デバッグもしたい。mac で android studio インストールする。
+    - ファイル共有する方法も把握しておく。
 
 ## Loadmap
-- FireBase 環境構築
+- ✔ FireBase 環境構築
 - FireBase を用いたデモアプリの作成
+    - ジムに行った日や滞在時間、体重の推移などストアするアプリ作ったら面白そう。
+        - いちいちボタンを押してジムの入退室を管理するんじゃなくて、位置情報で入退室管理できたら面白そう。
 - Flutter のゲームフレームワークをチラ見する
 - アプリ王選手権にエントリするゲームの内容決める
 - 締め切り 12/13 までにリリース
 
-## 学んだ Widget
+## Widget
 - ```Scaffold```
     - 日本語で「足場」
     - ベースとなるウィジェットで、あんまり多用するものでもないかも
@@ -41,7 +52,7 @@
 - ```Expanded```
     - >ExpandedというWidgetは、RowやColumnの子Widget間の隙間を目一杯埋めたいときに使います。
     - [【Flutter基礎】Expandedについて](https://qiita.com/nannany_tis/items/d4114f615e4d53964121) 
-
+## StudyLog
 ## 8/8
 - KBoy の Flutter 大学を見て環境構築 (前にやってた)
 - [GoogleのFlutterドキュメント](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1/index.html?index=..%2F..index#0)を参考に進めた。
@@ -92,7 +103,7 @@
     - 次回も Flutter 大学の チュートリアルを進めていく。firebase 環境構築くらいはやりたい。
 
 ## 8/16
-- **BlueStacks で Android App を起動する場合**、```build/app/outputs/spk/debug/app-debug.apk``` を BlueStacks にドラッグドロップでインストールできる。
+- **BlueStacks で Android App を起動する場合**、```build/app/outputs/apk/debug/app-debug.apk``` を BlueStacks にドラッグドロップでインストールできる。
 - 外部パッケージのインポート
     - pub.yaml の　dependences に　```provider: ^4.3.2``` 的な感じでほしいパッケージを記入すると、Android Studio の右上に ```Pub get``` が出てくるのでクリック。
 - [【Flutter実践】ProviderパターンでModelを作成する](https://www.youtube.com/watch?v=iN2IjSQR7Fs&t=11s) を参考に進めた。
@@ -102,3 +113,42 @@
         - ```notifyListeners```すると状態の変化を通知することができる。
         - 状態を供給するにはアプリ全体を Provider に渡す必要がある。
     - これは理解するより使えるようになって、結果的に理解してました的なところを目標にしたほうがよさそう。
+
+## 8/17
+- [【Flutter実践】Firebase環境構築と、Firestoreのデータを取得してアプリで表示](https://www.youtube.com/watch?v=IiEsyHiIwxc) に沿って進める。
+- Firebase は　iOS と Android 別々に環境構築する必要がある。
+    - Windows では　iOS はできないので、mac でそこの作業だけできないか確認する。
+- iOS の Firebase 環境構築
+    - windows では Xcode 開けないので無理っぽい。ちなみに [動画](https://www.youtube.com/watch?v=IiEsyHiIwxc) で open コマンドを使ってたが、powershell では　```Invoke-Item``` で代用可能。
+- Android の Firebase 環境構築
+    - 基本 Firebase のホームページに沿って進める
+    - パッケージ名に関して
+        - shift 二回押しで ファイル名検索
+        - manifest で src/main にあるやつを選ぶ
+        - package="~~~" みたいなとこがあるから、Firebase の Android パッケージ名にコピペする
+    - google-services.json を android/app 配下にコピーする。
+    - android ディレクトリ配下の build.gradle に コピーするやつをコピーする。
+        - android/app 配下にも build.gradle があるので注意
+    - android/app 配下の build.gradle にも コピーするやつをコピーする。
+    - pubspec.yaml で pub get する
+- Android に firebase を登録するとき、
+    ```
+    **Plugin project :firebase_core_web not found. Please update settings.gradle.**
+    **Plugin project :cloud_firestore_web not found. Please update settings.gradle.**
+    ```
+    みたいなエラーが出てきた。結果[【flutter】firebase登録時にsetting.gradeでのエラー](https://qiita.com/yukou29good0910/items/c84b04d9a3fe1de8e7c8) のまんま書き換えたら通った。
+- 実機 or BlueStacks でテスト or デバッグする時、右上に Debug と表示される件に関して
+    - MyApp の build に ```debugShowCheckedModeBanner: false``` と追加することで消える。
+- FireStore のデータを model から読んでリスト表示。[【Flutter実践】ModelからFirestoreのデータを取得する（mapの使い方も)](https://www.youtube.com/watch?v=xeaiMqPeyQk)
+- とりあえず、Firebase で CRUD 実装くらいまでは勉強続けたい。終わり次第アプリ考えて開発始める。
+- ```main.dart``` の配置を変更した場合、 ```flutter run``` では動かなくなる。
+    - この場合、```flutter run lib/path/main.dart``` で通常通り動く。
+    - [【Flutter実践】FirebaseのFirestoreに値を追加する（try catchの使い方も）](https://www.youtube.com/watch?v=3gySprP_kw4&t=121s)ではディレクトリ構造変えても特に何もしていないように見えたが、なぜ。
+    - むしろ毎回パス打つのは面倒なので、できれば ```main.dart```の配置は変えない方が良い気がする。
+        - 実行できないよ。的なダイアログが表示される。そこで ```　main.dart``` のパスを指定できた。解決。
+- 例外処理で、try構文 に関して、try の中で、ほかのメソッド内で例外処理を発生させることで catch に流すとこがしっくり来た。動画の21分ごろの説明。
+    - しかもエラー文が変数に入ってるので catch の中で流用できる。超賢い。
+- ```async-await``` に関して
+    - よくわかってないけど、await 順番に実行する。の意味。
+    - 同時に実行されると処理が打ち消しあってしまう場合ときに使う。
+    - 追加する文章を入力して、前のページに戻るとき、リストを更新するコードとリストを表示するコードとかは同時に行われるとよくない。(更新する前に表示されると意味ないので)そういうときに便利。
