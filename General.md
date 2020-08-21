@@ -1,7 +1,10 @@
 ## IT 系 全般に関する知識
 - プログラミング全般に共通する知識を書き溜めていく
+- 目次
+    - [Stateless と Statefull に関して](#statelessとstatefullに関して)
+    - [WebSocket に関して](#websocketに関して)
 ___
-- **Stateless** と **Statefull** に関して
+## **Stateless**と**Statefull**に関して
     - State は「状態」を意味する
     - **Stateless** の特徴
         - 「状態」を記憶しない。
@@ -21,3 +24,14 @@ ___
     - まとめ
         - FTP, SMTP など「手続き」を踏まないといけない場合は Statefull である必要がある。
         - 一方、手続きが必要でなく、サーバーに負荷がかかることが予知される場合は Stateless であったほうがよい
+
+## WebSocket に関して
+- Websocket は HTTP ベースでクライアント・サーバーの相互通信を実現する技術．
+- URL で，先頭の `http` とか `https` とか `ftp` は通信のプロトコルを表す．websocket の場合は `ws`
+    - `wss` は over SSL/TLS の意味
+- 実装する ブラックジャック アプリに関して
+    - Webアプリの場合，クライアントはブラウザからアクセスするので，クライアント側の実装(フロントエンド)は js でやるしかない．
+    - 逆にサーバーサイドはなんでもいいので，Python で行う．
+    - port 枯渇? によって複数ブラウザからは見れないので，gunicorn とかでサーバー起動する．(これ解決になってるかわからない．)
+- 参考
+    - [今さら聞けないWebSocket](https://qiita.com/chihiro/items/9d280704c6eff8603389)
