@@ -61,3 +61,10 @@
 - VScode で保存したタイミングでホットリロードする場合、command で `flutter run` するのでなく、 Run タブの Start debugging からアプリを起動させると保存でホットリロードになる。 
 - とりあえず公式 DOC みてどんな感じのデザインにするか決める
 - [Place a floating app bar above a list](https://flutter.dev/docs/cookbook/lists/floating-app-bar) をみて実装してみた。かっこいいけどヘッダーに載せる情報もないので、今回はもっとシンプルな奴にする。
+
+## 8/22
+- firebase 環境構築 (Android) 
+    - firebase (web) からプロジェクト作成、`google-serveces.json` を android/app 配下にコピー
+    - 二か所の `build.gradle` にコードを追加する。
+    - `Android Studio` の `pub get` は VScode ではターミナルで `flutter packages pub get`
+    - location は `Asia northeast 2` が大阪。１は東京
