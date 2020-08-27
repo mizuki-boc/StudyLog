@@ -68,3 +68,12 @@
     - 二か所の `build.gradle` にコードを追加する。
     - `Android Studio` の `pub get` は VScode ではターミナルで `flutter packages pub get`
     - location は `Asia northeast 2` が大阪。１は東京
+- model に関して
+    - model クラスを作成
+        - model クラスは 構造体 みたいな機能も持ってて、テキストフィールドから model.text に代入して、メソッドで保存、みたいなこともできる。
+    - ページ画面で `ChangeNotifierProvider` を return する
+    - `ChangeNotifierProvider` の body に　`Cunsumer` をとって、 <> 内に作った　model の名前を入れる。 
+        - そうすると、`consumer` の中で 作った model の関数を使用でき、StatelessWidget でも変更を反映できるようになる。
+    - `pubspec.yaml` に必要なプラグインを追加することを忘れずに！
+- ちょっとドキュメントとか見ずに進めてしまって、よくわからんくなってしまった。
+    - 明日、プロジェクト作成からはじめる。あと、**VScodeでやるとツールバーみたいなやつが出てきて絶妙に邪魔**。どうする
