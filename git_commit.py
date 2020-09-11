@@ -45,7 +45,7 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
         print(current, sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
     else:
         branch = '└' if is_last else '├'
-        print('{indent}{branch}{dirname}\n>'.format(indent=indent_current, branch=branch, dirname=current), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
+        print('{indent}{branch}{dirname}>'.format(indent=indent_current, branch=branch, dirname=current), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
 
     # 下の階層のパスを取得
     paths = [p for p in glob.glob(path+'/*') if os.path.isdir(p) or os.path.isfile(p)]
@@ -63,7 +63,7 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
         if os.path.isfile(p):
             branch = '└' if is_last_path(i) else '├'
             # +9 は StudyLog/ の 9文字分差し引く意味
-            print('{indent}{branch}[{filename}]({link})\n'.format(indent=indent_lower, branch=branch, filename=p.split('/')[::-1][0], link=p[p.find("StudyLog/")+9:]), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
+            print('{indent}{branch}[{filename}]({link})'.format(indent=indent_lower, branch=branch, filename=p.split('/')[::-1][0], link=p[p.find("StudyLog/")+9:]), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
         if os.path.isdir(p):
             tree(p, layer=layer+1, is_last=is_last_path(i), indent_current=indent_lower)
 
