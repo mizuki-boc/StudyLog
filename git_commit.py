@@ -45,7 +45,7 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
         print(current, sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
     else:
         branch = '└' if is_last else '├'
-        print('{indent}{branch}{dirname}>'.format(indent=indent_current, branch=branch, dirname=current), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
+        print('{indent}{branch}{dirname}'.format(indent=indent_current, branch=branch, dirname=current), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
 
     # 下の階層のパスを取得
     paths = [p for p in glob.glob(path+'/*') if os.path.isdir(p) or os.path.isfile(p)]
