@@ -15,7 +15,7 @@ TREE_TXT_FILE="index.md"
 def auto_commit(commit_message=datetime.datetime.now().strftime("%Y/%m/%d") + " " + datetime.datetime.now().strftime("%X")):
     result = subprocess.run(["git", "add", "."])
     print(result)
-    commit_message = "AUTO COMMIT AT:"
+    commit_message = "AUTO COMMIT AT:" + commit_message
     result = subprocess.run(["git", "commit", "-m", commit_message])
     print(result)
     result = subprocess.run(["git", "push", "origin"])
