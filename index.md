@@ -1,8 +1,5 @@
----
-title: タイトル
----
 ## 目次
-StudyLog
+StudyLog<br>
 　├docker
 　│　└[index.md](docker/index.md)
 　├[git_commit.py](git_commit.py)
