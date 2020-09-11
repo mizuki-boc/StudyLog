@@ -40,8 +40,6 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
     def is_last_path(i):
         return i == len(paths)-1
 
-    # print(paths)
-
     # 再帰的に表示
     for i, p in enumerate(paths):
         indent_lower = indent_current
@@ -56,11 +54,11 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
             tree(p, layer=layer+1, is_last=is_last_path(i), indent_current=indent_lower)
 
 if __name__ == '__main__':
-    # # クリアする
-    # f = open(TREE_TXT_FILE, "w")
-    # f.write("## 目次\n")
-    # f.close()
-    # # 書き込む
-    # tree(path=os.path.dirname(os.path.abspath(__file__)))
+    # クリアする
+    f = open(TREE_TXT_FILE, "w")
+    f.write("## 目次\n")
+    f.close()
+    # 書き込む
+    tree(path=os.path.dirname(os.path.abspath(__file__)))
 
     auto_commit()
