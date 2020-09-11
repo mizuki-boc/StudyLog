@@ -12,27 +12,15 @@ import glob
 
 TREE_TXT_FILE="index.md"
 
-def auto_commit(commit_message=datetime.datetime.now().isoformat()):
+def auto_commit(commit_message=datetime.datetime.now().strftime("%Y/%m/%d") + " " + datetime.datetime.now().strftime("%X")):
     result = subprocess.run(["git", "add", "."])
     print(result)
+    commit_message = "AUTO COMMIT AT:"
     result = subprocess.run(["git", "commit", "-m", commit_message])
     print(result)
     result = subprocess.run(["git", "push", "origin"])
     print(result)
-
-def create_index():
-    '''
-    index.md をディレクトリに応じて書き換える(未)
-    '''
-    d = os.listdir()
-    print(d)
-    d.remove(".DS_Store")
-    d.remove(".git")
-    d.remove(".gitignore")
-    d.remove("git_commit.py")
-    print(d)
-    for i in d:
-        print(i)
+    print(commit_message)
 
 def tree(path, layer=0, is_last=False, indent_current='　'):
 
@@ -68,13 +56,11 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
             tree(p, layer=layer+1, is_last=is_last_path(i), indent_current=indent_lower)
 
 if __name__ == '__main__':
-    # create_index()
-
-    # クリアする
-    f = open(TREE_TXT_FILE, "w")
-    f.write("## 目次\n")
-    f.close()
-    # 書き込む
-    tree(path=os.path.dirname(os.path.abspath(__file__)))
+    # # クリアする
+    # f = open(TREE_TXT_FILE, "w")
+    # f.write("## 目次\n")
+    # f.close()
+    # # 書き込む
+    # tree(path=os.path.dirname(os.path.abspath(__file__)))
 
     auto_commit()
