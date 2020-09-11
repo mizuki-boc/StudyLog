@@ -42,7 +42,7 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
     # カレントディレクトリの表示
     current = path.split('/')[::-1][0]
     if layer == 0:
-        print(current, sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
+        print(current + "<br>", sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
     else:
         branch = '└' if is_last else '├'
         print('{indent}{branch}{dirname}'.format(indent=indent_current, branch=branch, dirname=current), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
