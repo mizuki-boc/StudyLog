@@ -15,7 +15,7 @@ TREE_TXT_FILE="index.md"
 def auto_commit(commit_message=datetime.datetime.now().strftime("%Y/%m/%d") + " " + datetime.datetime.now().strftime("%X")):
     result = subprocess.run(["git", "add", "."])
     print(result)
-    commit_message = "AUTO COMMIT AT:" + commit_message
+    commit_message = "AUTO COMMIT AT: " + commit_message
     result = subprocess.run(["git", "commit", "-m", commit_message])
     print(result)
     result = subprocess.run(["git", "push", "origin"])
@@ -30,7 +30,7 @@ def tree(path, layer=0, is_last=False, indent_current='　'):
     # カレントディレクトリの表示
     current = path.split('/')[::-1][0]
     if layer == 0:
-        print(current + "<br>", sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
+        print(current, sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
     else:
         branch = '└' if is_last else '├'
         print('{indent}{branch}{dirname}'.format(indent=indent_current, branch=branch, dirname=current), sep="\n", file=codecs.open(TREE_TXT_FILE, 'a', 'utf-8'))
