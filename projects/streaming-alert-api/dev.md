@@ -74,4 +74,15 @@ ___
     - 参考になりそうなリンク集
         - [ニコニコをスクレイピングする](https://ameblo.jp/suzikisyou/entry-12573470259.html)
 
+### 9/25
+- youtube, twitch API を触ってみる
+    - 共にあんまり記事がなく，難しい．(特に Twitch は Qiita にも記事がない)
+    - Twitch は [公式DOC](https://twitchio.readthedocs.io/en/rewrite/twitchio.html) の，`Topics > class twitchio.webhook.StreamChanged(user_id)` の項目がそれっぽい．読む時間なかったので次回実験してみる
+        - OAuth token エラーが出る．トークンは Twitch コンソールから取得できるのだが，どこに渡せば良いかわからない．
+    - youtube api は，json は受け取れるものの，放送中かどうかを示すキーがどれなのかわからなかった．
+- 次回
+    - youtube, twitch API を触ってみる
+    - 参考になりそうなリンク集
+        - [ニコニコをスクレイピングする](https://ameblo.jp/suzikisyou/entry-12573470259.html)
+
 ## 反省点
