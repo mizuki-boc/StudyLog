@@ -1,6 +1,6 @@
 ## IT 系 全般に関する知識
 - プログラミング全般に共通する知識を書き溜めていく
-- トピックはバラバラ．気になった or 触れたものから順にストックする
+- トピックはバラバラ．カテゴリが微妙なものや，気になった or 触れたものからストックする
 ___
 ## **Stateless**と**Statefull**に関して
 - State は「状態」を意味する
@@ -73,3 +73,37 @@ ___
 - ざっくりした違い
     - Linux は Unix に比べ後発の OS．
     - もともと全く異なるが，中身はかなり似てる．
+
+## WebRTC に関して
+- WebRTC とは
+    - Web Real Time Communication の略
+    - HTML5 で新しく策定された API の規格で， P2P 通信でブラウザ間のリアルタイムコミュニケーションを実現する為の仕組み
+- P2P 通信
+    - プロトコルはリアルタイム性重視の UDP/IP
+- P2P 通信に必要な情報
+    1. Session Description Protocol (SDP)
+        - 通信に必要な各ブラウザの情報を示す文字列
+        - セッションの属性，メディアの形式，IPアドレス，ポート番号，通信帯域，など
+        - 片方の PC がもう片方に SDP を Offer して，相方が Answer する Offer/Answerモデルで通信を行う．
+    2. Interactive Connectivity Establishment (ICE)
+        - 多くの場合，端末は LAN の中にいる為， NAT された private な IP アドレスしか持っていない
+        - global IP アドレスと，通信可能なポート番号を知る必要がある．(privateIP と globalIP + port が一対一対応している！)
+        - STUN (Session Traversal Utilities for NATs)
+            - P2P 通信は，ネットワーク側から見てお互いの PC がどのような情報(IPとかポート)を持っているかお互いが知っている必要がある．
+            - ネットワーク側にいる STUN サーバーは，お互いの PC がどんな情報を持っているか PC に伝える仕事をする．
+            - STUN サーバーと通信することで，ネットワーク側から見た自分の情報を知ることができて，シグナリングサーバを介して相手に自分の情報を伝える．
+            - お互いの IP + port を知っているので，P2P 通信が可能になる．
+        - TURN (Traversal Using Relay around NAT)
+            - ↑の時点で P2P 通信は実現されているが，FW が設置されている場合は，STUN では UDP ポートは動的に割り振られるので，FW に穴を開けまくってることになり，セキュリティ的に問題あり
+            - または，何らかの理由で NAT を超えられない場合に TURN サーバが通信の橋渡しをする
+                - この「何らかの理由」がややこしい．
+                - 例としては，ipv4 網と ipv 6網間の P2P 接続を試みた際にできへんやんけ．となるらしい．
+            - あと，これはもはや P2P では無い．
+    - この必要な情報を交換することを**シグナリング**といい，**シグナリングサーバ**を用いて行う．
+- 参考リンク
+    - [壁を越えろ！WebRTCでNAT/Firewallを越えて通信しよう](https://html5experts.jp/mganeko/5554/) ←わかりやすかった
+    - [WebRTCの基本とP2P通信が成立するまでを学ぶ](https://qiita.com/daitasu/items/ae21b16361eb9f65ed43)
+    - [WebRTCとは](https://www.ois-yokohama.co.jp/redois/wp_redois/?page_id=124)
+    - [WebRTCの裏側](https://gist.github.com/voluntas/975bfa230e513d146965)
+    - [STUN/TURN サーバーとは？](https://callcenter-trend.com/2018/06/05/voip-webrtc-stun-turn-server01/)
+    - [新型コロナの自宅待機中に、ビデオチャットしながらゲームで遊べるサービスを作った話](https://qiita.com/aitaro/items/8a97d320f5586c6e7bb6)
