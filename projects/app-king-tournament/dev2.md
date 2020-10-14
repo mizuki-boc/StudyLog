@@ -35,3 +35,10 @@ ___
 - 画面遷移実装方法に関してはいろいろあるらしい
 - 参考
     - [[Unity初心者Tips]画面を切り替える3つの方法](https://qiita.com/JunShimura/items/d5ffae65b7fbbcc95ce9)
+
+### FixedUpdate 関数と Update 関数の違いに関して
+- Update 関数
+    - 毎フレーム呼ばれる
+- FixedUpdate 関数
+    - 呼ばれる間隔を指定できる
+- 入力アクションなど、リアルタイム性が高く求められる処理は Update 関数を使う
