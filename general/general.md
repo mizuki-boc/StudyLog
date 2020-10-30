@@ -107,3 +107,9 @@ ___
     - [WebRTCの裏側](https://gist.github.com/voluntas/975bfa230e513d146965)
     - [STUN/TURN サーバーとは？](https://callcenter-trend.com/2018/06/05/voip-webrtc-stun-turn-server01/)
     - [新型コロナの自宅待機中に、ビデオチャットしながらゲームで遊べるサービスを作った話](https://qiita.com/aitaro/items/8a97d320f5586c6e7bb6)
+
+## IPsec に関して
+- Security Architecture for Internet Protocol の略
+- 暗号化によってパケットの秘匿や改ざん検知を実現するプロトコル
+    - VPN 構築を実現するためのプロトコル
+    - 低レイヤでの暗号化なので，アプリは暗号化に関して気にしなくていい
