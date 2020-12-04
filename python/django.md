@@ -1,4 +1,6 @@
-# Django 入門
+# Django 入門 
+[参考リンク](https://docs.djangoproject.com/ja/3.1/intro/tutorial01/)
+___
 
 ## 特徴
 - Laravel, Rails とは異なり，MVT architecture を採用
@@ -16,6 +18,7 @@
     - 仮想環境の作成
         - 仮想環境で作成するので，まず，`python -m venv [venvname]`
         - そんで，`. venv/bin/activate` で仮想環境をアクティベートする
+            - ちなみに，オプション`-m`は，モジュール実行の意味．`-m`を外してコマンド叩くと，`No such file or directory` のエラー
     - django セットアップ
         - pip で django をインストールする
         - `django-admin startproject [mysite]` で，アプリのセットアップ
@@ -212,6 +215,45 @@
             ```
             これは便利そう．
             try-except のほうが理解はしやすいけど，コード量はかなり減る．
+    - テンプレートシステムを使う
+        - 404 レスポンスのショートカットで，変数　`question` にはオブジェクトが入っている
+        - 表示先の `detail.html` で，
+            ```html
+            <h1>{{ question.question_text }}</h1>
+            <ul>
+            {% for choice in question.choice_set.all %}
+                <li>{{ choice.choice_text }}</li>
+            {% endfor %}
+            </ul>
+            ```
+            とすることで，html 内で，オブジェクトのメンバ変数など呼び出せる (これは Flask のテンプレートシステムと同じに思える．)
+    - ハードコードされた URL を削除
+        - `index.html` で，
+            ```html
+            <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+            ```
+            こんな感じで，href の部分をハードコーディングしていると，`polls`を`specifics`とかに変えたいとなった場合，**`url.py`と`該当のhtmlファイル`の両方を書き換える必要がある．**
+            ```html
+            <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+            ```
+            Django では，上のように href を `url.py` で定義した，**URL定義を引用することができる**
+        - そうすることで，URLを変更したいとなった場合，`url.py`の変更のみで済む
+    - URL 名の名前空間
+        - Django プロジェクトに同名の URL 名がある場合 (例えば，polls の detail と，specifics の detail 両方実装する必要がある時など) は，**名前空間を定義することで解決できる**
+        - `polls/url.py` に，
+            ```python
+            app_name = 'polls'
+            ```
+            を追加し，該当する html ファイルで，
+            ```html
+            <a href="{% url 'detail' question.id %}">
+            ```
+            こんな感じになってるやつを，
+            ```html
+            <a href="{% url 'polls:detail' question.id %}">
+            ```
+            こうすることで，`pollsのdetailか〜`と，プロジェクトが認識してくれる．
+
 
             
 ## 用語
