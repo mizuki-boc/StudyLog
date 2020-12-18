@@ -1,4 +1,4 @@
-## PHP 学習ログ その２ 
+## PHP 学習ログ その２  test
 ___
 - 学習管理 App 「StudyManager」 を作成する．
 - 必要要件
