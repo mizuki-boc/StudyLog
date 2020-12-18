@@ -253,8 +253,127 @@ ___
             <a href="{% url 'polls:detail' question.id %}">
             ```
             こうすることで，`pollsのdetailか〜`と，プロジェクトが認識してくれる．
+- フォームの作成 ([参考リンクその4](https://docs.djangoproject.com/ja/3.1/intro/tutorial04/))
+    - こんな感じでつくる
+        ```html
+        <h1>{{ question.question_text }}</h1>
+
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+        <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Vote">
+        </form>
+        ```
+        シンプルに radio で選択した項目を post する form．
+    - `forloop.counter` は，そのまま何回ループしたかのカウンタ
+    - データ改ざんの恐れがある form 送信では， csrf の可能性があるため，
+        ```
+        {% csrf_token %}
+        ```
+        で対策する．(laravel でもこんなんあった)
+    - post された後に表示させる vote 関数を，
+        ```python
+        def vote(request, question_id):
+            question = get_object_or_404(Question, pk=question_id)
+            try:
+                selected_choice = question.choice_set.get(pk=request.POST['choice'])
+            except (KeyError, Choice.DoesNotExist):
+                # Redisplay the question voting form.
+                return render(request, 'polls/detail.html', {
+                    'question': question,
+                    'error_message': "You didn't select a choice.",
+                })
+            else:
+                selected_choice.votes += 1
+                selected_choice.save()
+                # Always return an HttpResponseRedirect after successfully dealing
+                # with POST data. This prevents data from being posted twice if a
+                # user hits the Back button.
+                return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        ```
+        こんな感じにする．(`HttpResponseRedirect`をインポートするのを忘れずに！)
+        - ここで，**注目すべき**なのは，
+            - `request.POST['choice']` で post されたデータを読み取っている点(空すなわち choice キーが未定義の場合は，KeyError が帰る)
+            - `detail.html` に detail 関数では引数に取っていない `error_message` を引数に取っている点
+            - カウンタが更新された場合，`HttpResponse` ではなく，`HttpResponseRedirect` を使用している点
+                - これは Django 特有ではなく，一般的にそうするらしい．~~なんでかはシラン~~
+        - 最後に result にアクセスしているので，result 関数を，
+            ```python
+            def results(request, question_id):
+                question = get_object_or_404(Question, pk=question_id)
+                return render(request, 'polls/results.html', {'question': question})
+            ```
+            こんな感じにする．で，テンプレートも作成
+            ```html
+            <h1>{{ question.question_text }}</h1>
+
+            <ul>
+            {% for choice in question.choice_set.all %}
+                <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+            </ul>
+
+            <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+            ```
+    - 汎用テンプレートの使い方
+        - URL から受け取ったパラメータを元に，DB からデータを取得し，テンプレートに表示させる．みたいなのは基本的によくあること．
+        - Django では，これにもショートカットが提供されている
+            - まず，`polls/urls.py` の URL からパラメータを受け取る部分(この場合は`<question_id>`)を`<pk>`に変更する．(pk は primary key の略)
+                - *pk にするのは\"**そういうもん**\"らしい*
+                ```python
+                from django.urls import path
+
+                from . import views
+
+                app_name = 'polls'
+                urlpatterns = [
+                    path('', views.IndexView.as_view(), name='index'),
+                    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+                    path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
+                    path('<int:question_id>/vote/', views.vote, name='vote'),
+                ]
+                ```
+                こんな感じ．
+            - で，view 関数やら detail 関数やら，
+                データ取得→表示
+                みたいな流れになってる関数を
+                ```python
+                class IndexView(generic.ListView):
+                    template_name = 'polls/index.html'
+                    context_object_name = 'latest_question_list'
+
+                    def get_queryset(self):
+                        """Return the last five published questions."""
+                        return Question.objects.order_by('-pub_date')[:5]
 
 
+                class DetailView(generic.DetailView):
+                    model = Question
+                    template_name = 'polls/detail.html'
+
+
+                class ResultsView(generic.DetailView):
+                    model = Question
+                    template_name = 'polls/results.html'
+                ```
+                のように class で書く．
+                **で，終わり．**
+        - 汎用テンプレートは，これ以外にも色々あるらしい(やりながら調べる)
+        - モデル名から，**引数を予想してくれてる??(ここが不明)**ことで，コード量が激減する
+- 自動テスト ([参考リンクその5](https://docs.djangoproject.com/ja/3.1/intro/tutorial05/))
+
+## Tips
+- DB 接続 (SQLite の場合)
+    - ターミナルで，`sqlite3 [db名]`
+        - 今の場合は，`sqlite3 db.sqlite3`
+    - コマンドは，MySQL と結構違う．(詳しくはggって)
+        - `show databases;` は `.ta`
+        - あとは普通に SQL (`select * from polls_choice` みたいな)
             
 ## 用語
 - パーマリンク
