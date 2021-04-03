@@ -6,7 +6,6 @@
 .\venv\Scripts\activate : このシステムではスクリプトの実行が無効になっているため、ファイル C:\Users\mizuk\Desktop\proje
 ct\kakeibo\venv\Scripts\Activate.ps1 を読み込むことができません。詳細については、「about_Execution_Policies」(https://g
 o.microsoft.com/fwlink/?LinkID=135170) を参照してください。
-発生場所 行:1 文字:1
 + .\venv\Scripts\activate
 + ~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : セキュリティ エラー: (: ) []、PSSecurityException
