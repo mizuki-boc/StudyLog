@@ -1,4 +1,5 @@
-## Python 勉強ログ
+# Python 勉強ログ
+python で遊びついでに知ったことをメモする
 ___
 
 - pip install で SSL 関連のエラー
